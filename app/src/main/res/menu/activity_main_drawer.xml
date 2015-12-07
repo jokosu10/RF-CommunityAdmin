@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/member">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_member_unverified"
+                    android:icon="@drawable/ic_menu_invite"
+                    android:title="@string/member_unverified"/>
+                <item
+                    android:id="@+id/nav_member_verified"
+                    android:icon="@drawable/ic_menu_allfriends"
+                    android:title="@string/member_verified"/>
+                <item
+                    android:id="@+id/nav_member_deleted"
+                    android:icon="@drawable/ic_menu_blocked_user"
+                    android:title="@string/member_deleted"/>
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="@string/account">
+        <menu>
+            <item
+                android:id="@+id/nav_account_edit"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="@string/account_edit"/>
+            <item
+                android:id="@+id/nav_account_log_out"
+                android:icon="@drawable/ic_menu_revert"
+                android:title="@string/account_log_out"/>
+        </menu>
+    </item>
+
+</menu>
