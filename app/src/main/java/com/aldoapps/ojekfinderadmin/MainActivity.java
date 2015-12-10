@@ -15,6 +15,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import com.aldoapps.ojekfinderadmin.model.Member;
+
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -24,7 +28,11 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mListView = (RecyclerView) findViewById(R.id.member_list);
+        mListView = (RecyclerView) findViewById(R.id.item_list);
+        ArrayList<Member> tempMember = new ArrayList<>();
+        tempMember.add(new Member("satu", "Aldo", "", 3f, "unverified"));
+        tempMember.add(new Member("satu", "Dio", "", 4f, "unverified"));
+        mListView.setAdapter(new MemberItemViewAdapter(tempMember));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

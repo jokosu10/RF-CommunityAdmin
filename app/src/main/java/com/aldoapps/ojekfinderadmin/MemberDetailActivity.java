@@ -19,6 +19,10 @@ public class MemberDetailActivity extends AppCompatActivity{
         setContentView(R.layout.activity_member_detail);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+            toolbar.setTitle(extras.getString("asdf"));
+        }
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -34,5 +38,7 @@ public class MemberDetailActivity extends AppCompatActivity{
         if(actionBar != null){
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+
+
     }
 }

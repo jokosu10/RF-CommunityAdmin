@@ -4,11 +4,12 @@ package com.aldoapps.ojekfinderadmin.model;
  * Created by user on 10/12/2015.
  */
 public class Member {
-    public Member(String _id, String userName, String avatar, float rating) {
+    public Member(String _id, String userName, String avatar, float rating, String status) {
         this._id = _id;
         this.userName = userName;
         this.avatar = avatar;
         this.rating = rating;
+        this.status = status;
     }
 
     public String get_id() {
@@ -48,4 +49,13 @@ public class Member {
     private String userName;
     private String avatar;
     private float rating;
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

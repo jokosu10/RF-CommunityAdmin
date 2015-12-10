@@ -48,4 +48,5 @@
     <!-- Circular Image View border width -->
     <dimen name="border_width">4dp</dimen>
     <dimen name="app_bar_height">200dp</dimen>
+    <dimen name="item_width">200dp</dimen>
 </resources>
