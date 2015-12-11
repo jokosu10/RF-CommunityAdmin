@@ -28,6 +28,8 @@
                     android:value="com.aldoapps.ojekfinderadmin.MainActivity"
                     />
         </activity>
+        <activity android:name=".LoginActivity"
+                  android:label="@string/login"
+                  />
     </application>
-
 </manifest>
