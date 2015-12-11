@@ -1,5 +1,8 @@
 package com.aldoapps.ojekfinderadmin;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -23,12 +26,15 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mPassword;
     private Button mLoginBtn;
 
+    private ProgressDialog mProgressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
-
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setMessage(getString(R.string.please_wait));
         mUsername = (EditText) findViewById(R.id.username_text);
         mPassword = (EditText) findViewById(R.id.password_text);
         mLoginBtn = (Button) findViewById(R.id.login_btn);
@@ -48,16 +54,44 @@ public class LoginActivity extends AppCompatActivity {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("CommunityAdmin");
         query.whereEqualTo("email", userName);
         query.whereEqualTo("password", password);
+        mProgressDialog.show();
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
-                if(e == null){
+                mProgressDialog.dismiss();
+                if (e == null) {
                     Toast.makeText(LoginActivity.this, "Berhasil", Toast.LENGTH_SHORT).show();
-                }else{
+                    navigateToMainActivity();
+                } else {
                     Toast.makeText(LoginActivity.this, "Failed :(", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
+    }
+
+    private void navigateToMainActivity() {
+        // before going to MainActivity we need to modify shared preference
+        SharedPreferences preferences = getSharedPreferences(Constants.KEY_SHARED_PREFS,
+                MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(Constants.KEY_HAS_LOGIN, true);
+        editor.apply();
+
+        // go to MainActivity
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if(mProgressDialog != null){
+            mProgressDialog.dismiss();
+        }
     }
 }

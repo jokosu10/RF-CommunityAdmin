@@ -86,11 +86,26 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_account_edit) {
 
         } else if (id == R.id.nav_account_log_out) {
+            doLogOut();
 
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void doLogOut() {
+        SharedPreferences preferences = getSharedPreferences(Constants.KEY_SHARED_PREFS,
+                MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(Constants.KEY_HAS_LOGIN, false);
+        editor.apply();
+
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 }
