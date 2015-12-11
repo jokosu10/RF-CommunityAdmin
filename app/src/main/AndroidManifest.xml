@@ -2,8 +2,12 @@
 <manifest package="com.aldoapps.ojekfinderadmin"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
+        android:name=".CommunityAdminApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
@@ -31,5 +35,12 @@
         <activity android:name=".LoginActivity"
                   android:label="@string/login"
                   />
+        <meta-data
+            android:name="com.parse.APPLICATION_ID"
+            android:value="MRmrmuHA28XU4lV2zFclVZGp8TosEChTU1vcoeLJ" />
+        <meta-data
+            android:name="com.parse.CLIENT_KEY"
+            android:value="eddgqZVpuEylYeTLg3Fjb0WMlQRQvFUFBKepvmhE" />
+
     </application>
 </manifest>

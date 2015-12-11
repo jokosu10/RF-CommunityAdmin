@@ -1,5 +1,7 @@
 package com.aldoapps.ojekfinderadmin;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -27,6 +29,18 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPreferences sharedPreferences = getSharedPreferences(
+                Constants.KEY_SHARED_PREFS, MODE_PRIVATE
+        );
+
+        if(!sharedPreferences.getBoolean(Constants.KEY_HAS_LOGIN, false)){
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        }
+
         setContentView(R.layout.activity_main);
         mListView = (RecyclerView) findViewById(R.id.item_list);
         ArrayList<Member> tempMember = new ArrayList<>();
