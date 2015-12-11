@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
                 mProgressDialog.dismiss();
-                if (e == null) {
+                if (objects.size() == 1) {
                     Toast.makeText(LoginActivity.this, "Berhasil", Toast.LENGTH_SHORT).show();
                     navigateToMainActivity();
                 } else {
