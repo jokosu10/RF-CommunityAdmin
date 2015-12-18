@@ -7,9 +7,13 @@ public class Member {
     public Member(String _id, String userName, String avatar, float rating, String status) {
         this._id = _id;
         this.userName = userName;
-        this.avatar = avatar;
+        this.avatarUrl = avatar;
         this.rating = rating;
         this.status = status;
+    }
+
+    public Member() {
+
     }
 
     public String get_id() {
@@ -29,12 +33,12 @@ public class Member {
         this.userName = userName;
     }
 
-    public String getAvatar() {
-        return avatar;
+    public String getAvatarUrl() {
+        return avatarUrl;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public void setAvatarUrl(String avatar) {
+        this.avatarUrl = avatar;
     }
 
     public float getRating() {
@@ -47,7 +51,7 @@ public class Member {
 
     private String _id;
     private String userName;
-    private String avatar;
+    private String avatarUrl;
     private float rating;
     private String status;
 

@@ -10,6 +10,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.aldoapps.ojekfinderadmin.model.Member;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,8 @@ public class MemberItemViewAdapter extends RecyclerView.Adapter<MemberItemViewAd
         holder.mName.setText(member.getUserName());
         holder.mRating.setRating(member.getRating());
         holder.mStatus.setText(member.getStatus());
+        Picasso.with(holder.mView.getContext())
+                .load(member.getAvatarUrl()).into(holder.mAvatar);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

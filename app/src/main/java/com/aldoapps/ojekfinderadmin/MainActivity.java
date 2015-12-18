@@ -3,28 +3,33 @@ package com.aldoapps.ojekfinderadmin;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
 
 import com.aldoapps.ojekfinderadmin.model.Member;
+import com.aldoapps.ojekfinderadmin.model.UserC;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private RecyclerView mListView;
+    private ArrayList<Member> mMembers = new ArrayList<>();
+    private MemberItemViewAdapter mAdapter;
+    private SwipeRefreshLayout mRefresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +48,18 @@ public class MainActivity extends AppCompatActivity
 
         setContentView(R.layout.activity_main);
         mListView = (RecyclerView) findViewById(R.id.item_list);
-        ArrayList<Member> tempMember = new ArrayList<>();
-        tempMember.add(new Member("satu", "Aldo", "", 3f, "unverified"));
-        tempMember.add(new Member("satu", "Dio", "", 4f, "unverified"));
-        mListView.setAdapter(new MemberItemViewAdapter(tempMember));
+        mRefresh = (SwipeRefreshLayout) findViewById(R.id.refresh);
+        mRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadParseUsers();
+                mRefresh.setRefreshing(false);
+            }
+        });
+        mAdapter = new MemberItemViewAdapter(mMembers);
+        mListView.setAdapter(mAdapter);
+
+        loadParseUsers();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -59,6 +72,29 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void loadParseUsers() {
+        ParseQuery<ParseUser> parseQuery = ParseUser.getQuery();
+        parseQuery.findInBackground(new FindCallback<ParseUser>() {
+            @Override
+            public void done(List<ParseUser> list, ParseException e) {
+                mMembers.clear();
+                for(ParseUser user : list){
+                    Member member = new Member();
+                    member.set_id(user.getObjectId());
+                    member.setUserName(user.getUsername());
+                    member.setStatus(user.getString(UserC.ACTIVATION_STATUS));
+                    if(user.getParseFile(UserC.AVATAR) != null){
+                        member.setAvatarUrl(user.getParseFile(UserC.AVATAR).getUrl());
+                    }
+                    mMembers.add(member);
+                }
+
+                mAdapter.notifyDataSetChanged();
+            }
+        });
+
     }
 
     @Override
