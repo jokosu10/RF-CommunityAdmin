@@ -10,12 +10,10 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.aldoapps.ojekfinderadmin.model.Member;
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by user on 10/12/2015.
@@ -41,8 +39,17 @@ public class MemberItemViewAdapter extends RecyclerView.Adapter<MemberItemViewAd
         holder.mName.setText(member.getUserName());
         holder.mRating.setRating(member.getRating());
         holder.mStatus.setText(member.getStatus());
-        Picasso.with(holder.mView.getContext())
-                .load(member.getAvatarUrl()).into(holder.mAvatar);
+
+        holder.mAvatar.setImageDrawable(null);
+        if(member.getAvatarUrl() != null){
+            Picasso.with(holder.mView.getContext())
+                    .load(member.getAvatarUrl())
+                    .transform(new CircleTransform())
+                    .into(holder.mAvatar);
+        }else{
+            holder.mAvatar.setIsColorful(true);
+            holder.mAvatar.setLetter(member.getUserName());
+        }
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +70,7 @@ public class MemberItemViewAdapter extends RecyclerView.Adapter<MemberItemViewAd
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         public final View mView;
-        public final CircleImageView mAvatar;
+        public final LetterImageView mAvatar;
         public final TextView mName;
         public final TextView mStatus;
         public final RatingBar mRating;
@@ -72,7 +79,7 @@ public class MemberItemViewAdapter extends RecyclerView.Adapter<MemberItemViewAd
             super(itemView);
 
             mView = itemView;
-            mAvatar = (CircleImageView) itemView.findViewById(R.id.member_avatar);
+            mAvatar = (LetterImageView) itemView.findViewById(R.id.member_avatar);
             mName = (TextView) itemView.findViewById(R.id.member_name);
             mStatus = (TextView) itemView.findViewById(R.id.member_status);
             mRating = (RatingBar) itemView.findViewById(R.id.member_rating_bar);

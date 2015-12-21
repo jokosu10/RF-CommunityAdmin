@@ -54,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("CommunityAdmin");
         query.whereEqualTo("email", userName);
         query.whereEqualTo("password", password);
+        query.whereEqualTo("isActive", "yes");
         mProgressDialog.show();
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
@@ -63,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Berhasil", Toast.LENGTH_SHORT).show();
                     navigateToMainActivity();
                 } else {
-                    Toast.makeText(LoginActivity.this, "Failed :(", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Failed", Toast.LENGTH_SHORT).show();
                 }
             }
         });
