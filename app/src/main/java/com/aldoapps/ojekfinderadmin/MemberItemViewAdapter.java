@@ -58,7 +58,6 @@ public class MemberItemViewAdapter extends RecyclerView.Adapter<MemberItemViewAd
                 Intent intent = new Intent(context, MemberDetailActivity.class);
                 intent.putExtra("asdf", member.getUserName());
                 context.startActivity(intent);
-
             }
         });
     }
