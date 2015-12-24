@@ -2,21 +2,21 @@ package com.aldoapps.ojekfinderadmin;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
 import com.aldoapps.ojekfinderadmin.model.CommunityAdmin;
 import com.aldoapps.ojekfinderadmin.model.Member;
+import com.aldoapps.ojekfinderadmin.model.ModelUserCommunity;
 import com.aldoapps.ojekfinderadmin.model.UserC;
 import com.aldoapps.ojekfinderadmin.model.UserCommunity;
 import com.parse.FindCallback;
@@ -34,9 +34,9 @@ public class MainActivity extends AppCompatActivity
     private static final String TAG = MainActivity.class.getSimpleName();
     private RecyclerView mListView;
     private ArrayList<Member> mMembers = new ArrayList<>();
+    private ArrayList<ModelUserCommunity> mUserComms = new ArrayList<>();
     private MemberItemViewAdapter mAdapter;
     private SwipeRefreshLayout mRefresh;
-    private ArrayList<String> mAvailableUserId = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,9 +108,14 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void done(List<UserCommunity> list, ParseException e) {
                 if (e == null) {
-                    mAvailableUserId.clear();
+                    mUserComms.clear();
                     for (UserCommunity userCommunity : list) {
-                        mAvailableUserId.add(userCommunity.getUserObjectId());
+                        ModelUserCommunity model = new ModelUserCommunity();
+                        model.setObjectId(userCommunity.getObjectId());
+                        model.setUserObjectId(userCommunity.getUserObjectId());
+                        model.setCommunityObjectId(userCommunity.getCommunityObjectId());
+                        model.setIsActive(userCommunity.getIsActive());
+                        mUserComms.add(model);
                     }
                     filterActualUsers();
                 } else {
@@ -126,15 +131,13 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void done(List<ParseUser> list, ParseException e) {
                 mMembers.clear();
-                Log.d(TAG, "list size " + list.size());
                 for (ParseUser user : list) {
-                    for (int i = 0; i < mAvailableUserId.size(); i++) {
-                        if (mAvailableUserId.get(i).equals(user.getObjectId())) {
-                            Log.d(TAG, "nambah ");
+                    for (ModelUserCommunity model : mUserComms) {
+                        if (model.getUserObjectId().equals(user.getObjectId())) {
                             Member member = new Member();
-                            member.set_id(user.getObjectId());
+                            member.setObjectId(user.getObjectId());
                             member.setUserName(user.getUsername());
-                            member.setStatus(user.getString(UserC.ACTIVATION_STATUS));
+                            member.setStatus(model.getIsActive());
                             if (user.getParseFile(UserC.AVATAR) != null) {
                                 member.setAvatarUrl(user.getParseFile(UserC.AVATAR).getUrl());
                             }

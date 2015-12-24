@@ -1,29 +1,18 @@
 package com.aldoapps.ojekfinderadmin.model;
 
+import java.io.Serializable;
+
 /**
  * Created by user on 10/12/2015.
  */
-public class Member {
-    public Member(String _id, String userName, String avatar, float rating, String status) {
-        this._id = _id;
-        this.userName = userName;
-        this.avatarUrl = avatar;
-        this.rating = rating;
-        this.status = status;
-    }
+public class Member implements Serializable{
+    private String objectId;
+    private String userName;
+    private String avatarUrl;
+    private float rating;
+    private String status;
 
-    public Member() {
-
-    }
-
-    public String get_id() {
-
-        return _id;
-    }
-
-    public void set_id(String _id) {
-        this._id = _id;
-    }
+    public Member() { }
 
     public String getUserName() {
         return userName;
@@ -49,17 +38,19 @@ public class Member {
         this.rating = rating;
     }
 
-    private String _id;
-    private String userName;
-    private String avatarUrl;
-    private float rating;
-    private String status;
-
     public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getObjectId() {
+        return objectId;
+    }
+
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
     }
 }
