@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.aldoapps.ojekfinderadmin.model.Community;
 import com.aldoapps.ojekfinderadmin.model.CommunityAdmin;
 import com.aldoapps.ojekfinderadmin.model.Member;
 import com.aldoapps.ojekfinderadmin.model.ModelUserCommunity;
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity
         ParseQuery<CommunityAdmin> adminQuery = CommunityAdmin.getQuery();
         adminQuery.include("communityAdminCommunity");
         adminQuery.whereEqualTo("objectId", adminObjectId);
-        adminQuery.getFirstInBackground(new GetCallback<CommunityAdmin>() {
+        GetCallback<CommunityAdmin> getCallback = new GetCallback<CommunityAdmin>() {
             @Override
             public void done(CommunityAdmin communityAdmin, ParseException e) {
                 if (e == null) {
@@ -97,14 +98,15 @@ public class MainActivity extends AppCompatActivity
                     Log.d(TAG, e.getMessage());
                 }
             }
-        });
+        };
+        adminQuery.getFirstInBackground(getCallback);
     }
 
     private void loadUserCommunity(CommunityAdmin communityAdmin) {
         ParseQuery<UserCommunity> query = UserCommunity.getQuery();
         query.whereEqualTo("communityObjectId", communityAdmin
                 .getCommunityAdminCommunity().getObjectId());
-        query.findInBackground(new FindCallback<UserCommunity>() {
+        FindCallback<UserCommunity> findCallback = new FindCallback<UserCommunity>() {
             @Override
             public void done(List<UserCommunity> list, ParseException e) {
                 if (e == null) {
@@ -122,12 +124,13 @@ public class MainActivity extends AppCompatActivity
                     Log.d(TAG, e.getMessage());
                 }
             }
-        });
+        };
+        query.findInBackground(findCallback);
     }
 
     private void filterActualUsers() {
         ParseQuery<ParseUser> parseQuery = ParseUser.getQuery();
-        parseQuery.findInBackground(new FindCallback<ParseUser>() {
+        FindCallback<ParseUser> findCallback = new FindCallback<ParseUser>() {
             @Override
             public void done(List<ParseUser> list, ParseException e) {
                 mMembers.clear();
@@ -147,9 +150,8 @@ public class MainActivity extends AppCompatActivity
                 }
                 mAdapter.notifyDataSetChanged();
             }
-        });
-
-
+        };
+        parseQuery.findInBackground(findCallback);
     }
 
     @Override

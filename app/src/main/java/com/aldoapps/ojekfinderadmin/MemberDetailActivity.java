@@ -58,7 +58,7 @@ public class MemberDetailActivity extends AppCompatActivity{
     private void activateOrDeactivateUser() {
         ParseQuery<UserCommunity> query = UserCommunity.getQuery();
         query.whereEqualTo("userObjectId", mMember.getObjectId());
-        query.getFirstInBackground(new GetCallback<UserCommunity>() {
+        GetCallback<UserCommunity> getCallback = new GetCallback<UserCommunity>() {
             @Override
             public void done(UserCommunity userCommunity, ParseException e) {
                 if(e == null){
@@ -69,9 +69,8 @@ public class MemberDetailActivity extends AppCompatActivity{
                     Log.d(TAG, e.getMessage());
                 }
             }
-        });
-
-
+        };
+        query.getFirstInBackground(getCallback);
     }
 
     private void updateUserCommunity(UserCommunity userCommunity) {
@@ -80,8 +79,7 @@ public class MemberDetailActivity extends AppCompatActivity{
         }else{
             userCommunity.setIsActiveToYes();
         }
-
-        userCommunity.saveEventually(new SaveCallback() {
+        SaveCallback saveCallback = new SaveCallback() {
             @Override
             public void done(ParseException e) {
                 if(e == null){
@@ -92,7 +90,7 @@ public class MemberDetailActivity extends AppCompatActivity{
                     Log.d(TAG, e.getMessage());
                 }
             }
-        });
-
+        };
+        userCommunity.saveEventually(saveCallback);
     }
 }

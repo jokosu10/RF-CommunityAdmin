@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.aldoapps.ojekfinderadmin.model.Community;
 import com.aldoapps.ojekfinderadmin.model.CommunityAdmin;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -60,8 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         query.whereEqualTo("password", password);
         query.whereEqualTo("isActive", "yes");
         mProgressDialog.show();
-
-        query.getFirstInBackground(new GetCallback<CommunityAdmin>() {
+        GetCallback<CommunityAdmin> getCallback = new GetCallback<CommunityAdmin>() {
             @Override
             public void done(CommunityAdmin communityAdmin, ParseException e) {
                 mProgressDialog.dismiss();
@@ -73,7 +73,8 @@ public class LoginActivity extends AppCompatActivity {
                     Log.d(TAG, e.getMessage());
                 }
             }
-        });
+        };
+        query.getFirstInBackground(getCallback);
     }
 
     private void saveCommunityAdminToLocalStorage(CommunityAdmin communityAdmin) {
