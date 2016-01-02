@@ -36,6 +36,10 @@
                   android:label="@string/login"
                   android:noHistory="true"
                   />
+        <activity android:name=".EditCommunityActivity"
+                  android:label="@string/edit_community"
+                    android:theme="@style/AppTheme.NoActionBar"
+            />
         <meta-data
             android:name="com.parse.APPLICATION_ID"
             android:value="MRmrmuHA28XU4lV2zFclVZGp8TosEChTU1vcoeLJ" />

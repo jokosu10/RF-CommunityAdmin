@@ -13,8 +13,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-import com.aldoapps.ojekfinderadmin.model.Community;
 import com.aldoapps.ojekfinderadmin.model.CommunityAdmin;
 import com.aldoapps.ojekfinderadmin.model.Member;
 import com.aldoapps.ojekfinderadmin.model.ModelUserCommunity;
@@ -38,6 +41,9 @@ public class MainActivity extends AppCompatActivity
     private ArrayList<ModelUserCommunity> mUserComms = new ArrayList<>();
     private MemberItemViewAdapter mAdapter;
     private SwipeRefreshLayout mRefresh;
+    private TextView mCommunityName;
+    private TextView mAdminEmail;
+    private LinearLayout mNavHeaderLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +61,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         setContentView(R.layout.activity_main);
+
         mListView = (RecyclerView) findViewById(R.id.item_list);
         mRefresh = (SwipeRefreshLayout) findViewById(R.id.refresh);
         mRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -78,8 +85,36 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        mNavHeaderLayout = (LinearLayout) getLayoutInflater()
+                .inflate(R.layout.nav_header_main, null);
+        mCommunityName = (TextView) mNavHeaderLayout.findViewById(R.id.community_name);
+        mAdminEmail = (TextView) mNavHeaderLayout.findViewById(R.id.admin_email);
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.addHeaderView(mNavHeaderLayout);
+        findExistingCommunity();
+    }
+
+    private void findExistingCommunity() {
+        SharedPreferences preferences = getSharedPreferences(Constants.KEY_SHARED_PREFS,
+                MODE_PRIVATE);
+        String objectId = preferences.getString(Constants.KEY_ADMIN_OBJECT_ID, "");
+        ParseQuery<CommunityAdmin> query = CommunityAdmin.getQuery();
+        query.include("communityAdminCommunity");
+        GetCallback<CommunityAdmin> getCallback = new GetCallback<CommunityAdmin>() {
+            @Override
+            public void done(CommunityAdmin communityAdmin, ParseException e) {
+                if(e == null){
+                    mCommunityName.setText(communityAdmin
+                            .getCommunityAdminCommunity().getName());
+                    mAdminEmail.setText(communityAdmin.getName());
+                }else{
+                    Log.d(TAG, e.getMessage());
+                }
+            }
+        };
+        query.getInBackground(objectId, getCallback);
     }
 
     private void loadParseUsers() {
@@ -187,6 +222,7 @@ public class MainActivity extends AppCompatActivity
 
         switch (id){
             case R.id.nav_account_edit:
+                navigateToEditCommunity();
                 break;
             case R.id.nav_account_log_out:
                 doLogOut();
@@ -196,6 +232,11 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void navigateToEditCommunity() {
+        Intent intent = new Intent(this, EditCommunityActivity.class);
+        startActivity(intent);
     }
 
     private void doLogOut() {

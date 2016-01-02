@@ -18,4 +18,6 @@
     <string name="login_quotes">May the force be with you</string>
     <string name="login">Admin Komunitas</string>
     <string name="please_wait">Please wait a moment..</string>
+    <string name="edit_community">Edit Community</string>
+    <string name="community_name">Community name</string>
 </resources>
