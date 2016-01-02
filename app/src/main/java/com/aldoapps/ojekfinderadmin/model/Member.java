@@ -8,6 +8,8 @@ import java.io.Serializable;
 public class Member implements Serializable{
     private String objectId;
     private String userName;
+    private String displayName;
+    private String phoneNumber;
     private String avatarUrl;
     private float rating;
     private String status;
@@ -52,5 +54,21 @@ public class Member implements Serializable{
 
     public void setObjectId(String objectId) {
         this.objectId = objectId;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

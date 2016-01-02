@@ -7,10 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aldoapps.ojekfinderadmin.model.Member;
-import com.aldoapps.ojekfinderadmin.model.ModelUserCommunity;
 import com.aldoapps.ojekfinderadmin.model.UserCommunity;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -26,17 +26,24 @@ public class MemberDetailActivity extends AppCompatActivity{
     private static final String TAG = MemberDetailActivity.class.getSimpleName();
     public Member mMember;
 
+    private TextView mDisplayName;
+    private TextView mPhoneNumber;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_member_detail);
+        mDisplayName = (TextView) findViewById(R.id.display_name);
+        mPhoneNumber = (TextView) findViewById(R.id.phone_number);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         Bundle extras = getIntent().getExtras();
         if(extras != null){
             mMember = (Member) extras.getSerializable(KEY_MEMBER);
             toolbar.setTitle(mMember.getUserName());
+            mDisplayName.setText(mMember.getDisplayName());
+            mPhoneNumber.setText(mMember.getPhoneNumber());
         }
         setSupportActionBar(toolbar);
 

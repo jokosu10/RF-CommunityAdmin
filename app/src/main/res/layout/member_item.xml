@@ -12,13 +12,14 @@
         android:layout_weight="2"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:gravity="top|left"
+        android:gravity="center"
+        android:layout_marginRight="@dimen/padding_small"
         >
 
         <com.aldoapps.ojekfinderadmin.LetterImageView
             android:id="@+id/member_avatar"
-            android:layout_width="@dimen/image_large"
-            android:layout_height="@dimen/image_large"
+            android:layout_width="@dimen/image_medium"
+            android:layout_height="@dimen/image_medium"
             />
 
     </LinearLayout>
@@ -26,7 +27,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="7"
+        android:layout_weight="9"
         android:orientation="vertical"
         >
             <TextView
@@ -54,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:numStars="5"
                 style="?android:attr/ratingBarStyleSmall"
+                android:visibility="gone"
                 />
     </LinearLayout>
 </LinearLayout>

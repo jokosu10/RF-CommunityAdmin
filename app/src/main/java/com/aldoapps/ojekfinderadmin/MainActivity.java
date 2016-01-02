@@ -141,6 +141,8 @@ public class MainActivity extends AppCompatActivity
                             member.setObjectId(user.getObjectId());
                             member.setUserName(user.getUsername());
                             member.setStatus(model.getIsActive());
+                            member.setDisplayName(user.getString("displayName"));
+                            member.setPhoneNumber(user.getString("phoneNumber"));
                             if (user.getParseFile(UserC.AVATAR) != null) {
                                 member.setAvatarUrl(user.getParseFile(UserC.AVATAR).getUrl());
                             }
@@ -170,17 +172,25 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_member_unverified) {
-            // Handle the camera action
-        } else if (id == R.id.nav_member_verified) {
+//        if (id == R.id.nav_member_unverified) {
+//            // Handle the camera action
+//        } else if (id == R.id.nav_member_verified) {
+//
+//        } else if (id == R.id.nav_member_deleted) {
+//
+//        } else if (id == R.id.nav_account_edit) {
+//
+//        } else if (id == R.id.nav_account_log_out) {
+//            doLogOut();
+//
+//        }
 
-        } else if (id == R.id.nav_member_deleted) {
-
-        } else if (id == R.id.nav_account_edit) {
-
-        } else if (id == R.id.nav_account_log_out) {
-            doLogOut();
-
+        switch (id){
+            case R.id.nav_account_edit:
+                break;
+            case R.id.nav_account_log_out:
+                doLogOut();
+                break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
