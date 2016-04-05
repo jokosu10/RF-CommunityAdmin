@@ -8,13 +8,13 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView android:id="@+id/item_list"
-                                            android:name="com.aldoapps.deletethisimmediately.ItemListFragment"
+                                            android:name="com.aldoapps.ojekfinderadmin.MemberDetailFragment"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:layout_marginLeft="16dp"
                                             android:layout_marginRight="16dp"
                                             app:layoutManager="LinearLayoutManager"
-                                            tools:context="com.aldoapps.deletethisimmediately.ItemListActivity"
+                                            tools:context="com.aldoapps.ojekfinderadmin.MemberDetailActivity"
                                             tools:listitem="@layout/member_item"/>
 
 </android.support.v4.widget.SwipeRefreshLayout>
