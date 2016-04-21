@@ -1,4 +1,4 @@
-package com.aldoapps.ojekfinderadmin;
+package com.aldoapps.communityadmin;
 
 import android.content.Context;
 import android.graphics.Canvas;

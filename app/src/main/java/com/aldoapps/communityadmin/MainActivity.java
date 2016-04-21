@@ -1,4 +1,4 @@
-package com.aldoapps.ojekfinderadmin;
+package com.aldoapps.communityadmin;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,16 +13,14 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.aldoapps.ojekfinderadmin.model.CommunityAdmin;
-import com.aldoapps.ojekfinderadmin.model.Member;
-import com.aldoapps.ojekfinderadmin.model.ModelUserCommunity;
-import com.aldoapps.ojekfinderadmin.model.UserC;
-import com.aldoapps.ojekfinderadmin.model.UserCommunity;
+import com.aldoapps.communityadmin.model.CommunityAdmin;
+import com.aldoapps.communityadmin.model.Member;
+import com.aldoapps.communityadmin.model.ModelUserCommunity;
+import com.aldoapps.communityadmin.model.UserC;
+import com.aldoapps.communityadmin.model.UserCommunity;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;

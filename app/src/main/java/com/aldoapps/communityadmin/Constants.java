@@ -1,4 +1,4 @@
-package com.aldoapps.ojekfinderadmin;
+package com.aldoapps.communityadmin;
 
 /**
  * Created by user on 11/12/2015.

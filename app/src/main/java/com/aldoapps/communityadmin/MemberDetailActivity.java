@@ -1,4 +1,4 @@
-package com.aldoapps.ojekfinderadmin;
+package com.aldoapps.communityadmin;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.aldoapps.ojekfinderadmin.model.Member;
-import com.aldoapps.ojekfinderadmin.model.UserCommunity;
+import com.aldoapps.communityadmin.model.Member;
+import com.aldoapps.communityadmin.model.UserCommunity;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;

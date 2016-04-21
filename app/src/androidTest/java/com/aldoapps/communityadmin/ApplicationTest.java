@@ -1,4 +1,4 @@
-package com.aldoapps.ojekfinderadmin;
+package com.aldoapps.communityadmin;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

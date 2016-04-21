@@ -1,4 +1,4 @@
-package com.aldoapps.ojekfinderadmin.model;
+package com.aldoapps.communityadmin.model;
 
 import java.io.Serializable;
 

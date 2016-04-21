@@ -1,10 +1,10 @@
-package com.aldoapps.ojekfinderadmin;
+package com.aldoapps.communityadmin;
 
 import android.app.Application;
 
-import com.aldoapps.ojekfinderadmin.model.Community;
-import com.aldoapps.ojekfinderadmin.model.CommunityAdmin;
-import com.aldoapps.ojekfinderadmin.model.UserCommunity;
+import com.aldoapps.communityadmin.model.Community;
+import com.aldoapps.communityadmin.model.CommunityAdmin;
+import com.aldoapps.communityadmin.model.UserCommunity;
 import com.parse.Parse;
 import com.parse.ParseObject;
 

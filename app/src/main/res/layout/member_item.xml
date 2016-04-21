@@ -16,7 +16,7 @@
         android:layout_marginRight="@dimen/padding_small"
         >
 
-        <com.aldoapps.ojekfinderadmin.LetterImageView
+        <com.aldoapps.communityadmin.LetterImageView
             android:id="@+id/member_avatar"
             android:layout_width="@dimen/image_medium"
             android:layout_height="@dimen/image_medium"

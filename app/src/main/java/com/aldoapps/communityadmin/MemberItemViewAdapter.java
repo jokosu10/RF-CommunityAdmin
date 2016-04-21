@@ -1,4 +1,4 @@
-package com.aldoapps.ojekfinderadmin;
+package com.aldoapps.communityadmin;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.aldoapps.ojekfinderadmin.model.Member;
+import com.aldoapps.communityadmin.model.Member;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

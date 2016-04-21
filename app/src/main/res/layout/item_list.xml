@@ -14,7 +14,7 @@
                                             android:layout_marginLeft="16dp"
                                             android:layout_marginRight="16dp"
                                             app:layoutManager="LinearLayoutManager"
-                                            tools:context="com.aldoapps.ojekfinderadmin.MemberDetailActivity"
+                                            tools:context="com.aldoapps.communityadmin.MemberDetailActivity"
                                             tools:listitem="@layout/member_item"/>
 
 </android.support.v4.widget.SwipeRefreshLayout>

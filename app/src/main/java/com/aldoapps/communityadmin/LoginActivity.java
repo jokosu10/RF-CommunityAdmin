@@ -1,4 +1,4 @@
-package com.aldoapps.ojekfinderadmin;
+package com.aldoapps.communityadmin;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -11,15 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.aldoapps.ojekfinderadmin.model.Community;
-import com.aldoapps.ojekfinderadmin.model.CommunityAdmin;
-import com.parse.FindCallback;
+import com.aldoapps.communityadmin.model.CommunityAdmin;
 import com.parse.GetCallback;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
-
-import java.util.List;
 
 /**
  * Created by user on 11/12/2015.
