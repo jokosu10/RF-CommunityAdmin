@@ -17,6 +17,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildTypes.each {
+        it.resValue "string", 'RF_APPLICATION_ID', RF_Application_Id
+        it.resValue "string", 'RF_CLIENT_KEY', RF_Client_Key
+    }
+
 }
 
 dependencies {

@@ -42,10 +42,10 @@
             />
         <meta-data
             android:name="com.parse.APPLICATION_ID"
-            android:value="MRmrmuHA28XU4lV2zFclVZGp8TosEChTU1vcoeLJ" />
+            android:value="@string/RF_APPLICATION_ID" />
         <meta-data
             android:name="com.parse.CLIENT_KEY"
-            android:value="eddgqZVpuEylYeTLg3Fjb0WMlQRQvFUFBKepvmhE" />
+            android:value="@string/RF_CLIENT_KEY" />
 
     </application>
 </manifest>
