@@ -20,6 +20,12 @@ public class CommunityAdminApplication extends Application {
         ParseObject.registerSubclass(CommunityAdmin.class);
         ParseObject.registerSubclass(Community.class);
         ParseObject.registerSubclass(UserCommunity.class);
-        Parse.initialize(this);
+
+        Parse.initialize(new Parse.Configuration.Builder(this)
+                .applicationId(getString(R.string.RF_APPLICATION_ID))
+                .clientKey(getString(R.string.RF_CLIENT_KEY))
+                .server("http://ridefinder.herokuapp.com/parse/")
+                .build());
+
     }
 }
